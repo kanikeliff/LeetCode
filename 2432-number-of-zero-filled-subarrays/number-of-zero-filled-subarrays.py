@@ -4,22 +4,16 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        n = len(nums)
-        res = 0
-        left = 0  # start of the zero window
+       
+        count = 0
+        total = 0
+        for i in nums:
 
-        while left < n:
-            if nums[left] == 0:
-                # expand the window
-                right = left
-                while right < n and nums[right] == 0:
-                    right += 1
-                length = right - left
-                # number of zero-filled subarrays in this window
-                res += length * (length + 1) // 2
-                # move window start past this block
-                left = right
+            if i == 0:
+                count += 1
+                total += count
             else:
-                left += 1
+                count = 0
+            
 
-        return res
+        return total
