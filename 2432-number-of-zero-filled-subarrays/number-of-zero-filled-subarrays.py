@@ -4,17 +4,22 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        res = 0    # total zero-filled subarrays
-        count = 0  # current streak length of zeros
+        n = len(nums)
+        res = 0
+        left = 0  # start of the zero window
 
-        for i in range(len(nums)):
-            if nums[i] == 0:     # check the value at index i
-                count += 1       # extend the zero streak
-                res += count     # add all subarrays ending here
+        while left < n:
+            if nums[left] == 0:
+                # expand the window
+                right = left
+                while right < n and nums[right] == 0:
+                    right += 1
+                length = right - left
+                # number of zero-filled subarrays in this window
+                res += length * (length + 1) // 2
+                # move window start past this block
+                left = right
             else:
-                count = 0        # reset streak when non-zero
+                left += 1
 
         return res
-
-
-            
