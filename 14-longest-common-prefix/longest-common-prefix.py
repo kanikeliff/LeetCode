@@ -6,13 +6,12 @@ class Solution(object):
         """
         if not strs:
             return ""
-        strs.sort()
-        first= strs[0]
-        last=strs[-1]
-        i=0
-        min1= min(len(first),len(last))
-        while i < min1 and first[i]==last[i]:
-            i += 1
-        return first[:i]
+        min_len = min(len(s) for s in strs)
+        for i in range(min_len):
+            current_char = strs[0][i]
+            if any(s[i] != current_char for s in strs[1:]):
+                return strs[0][:i]
+    
+        return strs[0][:min_len]
         
 
